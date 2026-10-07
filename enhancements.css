@@ -1,0 +1,231 @@
+/* =====================================================
+   Himachal Pradesh Tourism - Enhancement Styles
+   Stats bar, testimonials, FAQ, back-to-top, reveals
+   ===================================================== */
+
+html {
+    scroll-padding-top: 90px;
+}
+
+/* ---------- Active nav link ---------- */
+.navbar .all-links li a.active {
+    color: #a8d8f0;
+}
+
+/* ---------- Stats strip ---------- */
+section.stats {
+    width: 100%;
+    max-width: none;
+    padding: 60px 10px;
+    margin-top: 0;
+    background: #1a3c5e;
+}
+
+.stats-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.stat-item {
+    flex: 1;
+    min-width: 180px;
+    text-align: center;
+    padding: 20px;
+}
+
+.stat-number {
+    display: block;
+    font-size: 2.6rem;
+    font-weight: 700;
+    color: #a8d8f0;
+}
+
+.stat-label {
+    display: block;
+    margin-top: 5px;
+    font-size: 15px;
+    color: #dce9f3;
+    letter-spacing: 0.5px;
+}
+
+/* ---------- Testimonials ---------- */
+.testimonial-card {
+    padding: 25px 20px;
+}
+
+.testimonial-card .quote-icon {
+    color: #1a3c5e;
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.testimonial-card .review-text {
+    font-style: italic;
+    color: #555;
+    line-height: 1.6;
+    min-height: 90px;
+}
+
+.reviewer {
+    display: flex;
+    align-items: center;
+    margin-top: 18px;
+}
+
+.reviewer-avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: #1a3c5e;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    margin-right: 12px;
+}
+
+.reviewer-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.reviewer-info strong {
+    color: #1a3c5e;
+    font-size: 15px;
+}
+
+.reviewer-info span {
+    color: #777;
+    font-size: 13px;
+}
+
+/* ---------- FAQ accordion ---------- */
+.faq-list {
+    max-width: 800px;
+    width: 100%;
+    margin-top: 40px;
+    padding: 0 10px;
+}
+
+.faq-item {
+    background: #fff;
+    border: 1px solid #e2e2e2;
+    border-radius: 8px;
+    margin-bottom: 14px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.faq-item summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 16px 45px 16px 18px;
+    font-weight: 600;
+    color: #1a3c5e;
+    position: relative;
+    font-size: 16px;
+}
+
+.faq-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq-item summary::after {
+    content: "+";
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 22px;
+    font-weight: 400;
+    color: #1a3c5e;
+    transition: transform 0.2s ease;
+}
+
+.faq-item[open] summary::after {
+    content: "\2212";
+}
+
+.faq-item[open] {
+    border-color: #1a3c5e;
+}
+
+.faq-item .faq-answer {
+    padding: 0 18px 16px;
+    color: #555;
+    line-height: 1.6;
+    font-size: 15px;
+}
+
+/* ---------- Back to top button ---------- */
+#back-to-top {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 46px;
+    height: 46px;
+    border: none;
+    border-radius: 50%;
+    background: #1a3c5e;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 6;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(15px);
+    transition: 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+#back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+#back-to-top:hover {
+    background: #2a5a8e;
+}
+
+/* ---------- Scroll reveal (only active when JS is present) ---------- */
+.js .stat-item,
+.js .testimonial-card,
+.js .faq-item {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.js .stat-item.visible,
+.js .testimonial-card.visible,
+.js .faq-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ---------- Responsive ---------- */
+@media screen and (max-width: 860px) {
+    .stat-number {
+        font-size: 2rem;
+    }
+
+    .faq-list {
+        margin-top: 30px;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .stat-item {
+        min-width: 45%;
+    }
+
+    .testimonial-card .review-text {
+        min-height: 0;
+    }
+}

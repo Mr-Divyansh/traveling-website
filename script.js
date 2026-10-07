@@ -85,4 +85,144 @@ document.addEventListener("DOMContentLoaded", function () {
       );
     }
   });
+
+  /* -------------------------------------------------
+     4. Animated Stat Counters
+     ------------------------------------------------- */
+  // Signal to CSS that JS is available (enables reveal animations)
+  document.documentElement.classList.add("js");
+
+  function animateCounter(el) {
+    var target = parseInt(el.getAttribute("data-target"), 10) || 0;
+    var suffix = el.getAttribute("data-suffix") || "";
+    var duration = 1800;
+    var startTime = null;
+
+    function step(timestamp) {
+      if (!startTime) startTime = timestamp;
+      var progress = Math.min((timestamp - startTime) / duration, 1);
+      // Ease-out for a nicer feel
+      var eased = 1 - Math.pow(1 - progress, 3);
+      var current = Math.floor(eased * target);
+      el.textContent = current.toLocaleString("en-IN") + suffix;
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        el.textContent = target.toLocaleString("en-IN") + suffix;
+      }
+    }
+    requestAnimationFrame(step);
+  }
+
+  var statNumbers = document.querySelectorAll(".stat-number");
+  if ("IntersectionObserver" in window && statNumbers.length > 0) {
+    var counterObserver = new IntersectionObserver(
+      function (entries, observer) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            animateCounter(entry.target);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+    statNumbers.forEach(function (num) {
+      counterObserver.observe(num);
+    });
+  } else {
+    // Fallback: just show final values
+    statNumbers.forEach(function (el) {
+      var target = parseInt(el.getAttribute("data-target"), 10) || 0;
+      var suffix = el.getAttribute("data-suffix") || "";
+      el.textContent = target.toLocaleString("en-IN") + suffix;
+    });
+  }
+
+  /* -------------------------------------------------
+     5. Scroll Reveal Animations
+     ------------------------------------------------- */
+  var revealElements = document.querySelectorAll(
+    ".stat-item, .testimonial-card, .faq-item"
+  );
+  if ("IntersectionObserver" in window && revealElements.length > 0) {
+    var revealObserver = new IntersectionObserver(
+      function (entries, observer) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    revealElements.forEach(function (el) {
+      revealObserver.observe(el);
+    });
+  } else {
+    revealElements.forEach(function (el) {
+      el.classList.add("visible");
+    });
+  }
+
+  /* -------------------------------------------------
+     6. Back to Top Button
+     ------------------------------------------------- */
+  var backToTop = document.getElementById("back-to-top");
+
+  function toggleBackToTop() {
+    if (!backToTop) return;
+    if (window.scrollY > 400) {
+      backToTop.classList.add("show");
+    } else {
+      backToTop.classList.remove("show");
+    }
+  }
+
+  window.addEventListener("scroll", toggleBackToTop, { passive: true });
+  toggleBackToTop();
+
+  if (backToTop) {
+    backToTop.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  /* -------------------------------------------------
+     7. Active Nav Link on Scroll
+     ------------------------------------------------- */
+  var navLinks = document.querySelectorAll(".all-links a[href^='#']");
+  var sectionsById = {};
+
+  navLinks.forEach(function (link) {
+    var id = link.getAttribute("href").slice(1);
+    var section = document.getElementById(id);
+    if (section) {
+      sectionsById[id] = { link: link, section: section };
+    }
+  });
+
+  function updateActiveLink() {
+    var scrollPos = window.scrollY + 120;
+    var currentId = null;
+
+    Object.keys(sectionsById).forEach(function (id) {
+      var s = sectionsById[id].section;
+      if (s.offsetTop <= scrollPos) {
+        currentId = id;
+      }
+    });
+
+    Object.keys(sectionsById).forEach(function (id) {
+      if (id === currentId) {
+        sectionsById[id].link.classList.add("active");
+      } else {
+        sectionsById[id].link.classList.remove("active");
+      }
+    });
+  }
+
+  window.addEventListener("scroll", updateActiveLink, { passive: true });
+  updateActiveLink();
 });
