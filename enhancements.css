@@ -329,3 +329,203 @@ section.stats {
         height: 220px;
     }
 }
+
+/* ---------- Remote hero backgrounds (images via URL) ---------- */
+.homepage {
+    background-image: url("https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1600&q=80");
+    background-position: center 60%;
+    background-size: cover;
+}
+
+.page-hero {
+    background-size: cover;
+    background-position: center;
+}
+
+.page-hero--packages {
+    background-image: linear-gradient(rgba(16, 40, 66, 0.7), rgba(16, 40, 66, 0.7)), url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1600&q=80");
+}
+
+.page-hero--destinations {
+    background-image: linear-gradient(rgba(16, 40, 66, 0.7), rgba(16, 40, 66, 0.7)), url("https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1600&q=80");
+}
+
+.page-hero--about {
+    background-image: linear-gradient(rgba(16, 40, 66, 0.7), rgba(16, 40, 66, 0.7)), url("https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1600&q=80");
+}
+
+.page-hero--contact {
+    background-image: linear-gradient(rgba(16, 40, 66, 0.7), rgba(16, 40, 66, 0.7)), url("https://images.unsplash.com/photo-1477346611705-65d1883cee1e?auto=format&fit=crop&w=1200&q=80");
+}
+
+/* Fit the extra nav link comfortably on desktop */
+.navbar .all-links a {
+    margin-left: 28px;
+    font-size: 15px;
+}
+
+/* ---------- Polished primary button (homepage hero) ---------- */
+.content a {
+    display: inline-block;
+    background: linear-gradient(135deg, #1a3c5e 0%, #2a6db0 100%);
+    color: #fff;
+    padding: 14px 34px;
+    border-radius: 6px;
+    font-weight: 500;
+    box-shadow: 0 8px 20px rgba(26, 60, 94, 0.35);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.content a:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 26px rgba(26, 60, 94, 0.45);
+    color: #fff;
+}
+
+/* ---------- Photo gallery (remote images + lightbox) ---------- */
+.gallery .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    max-width: 1200px;
+    width: 100%;
+    margin-top: 50px;
+    padding: 0 10px;
+}
+
+.gallery-item {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.12);
+}
+
+.gallery-item img {
+    display: block;
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    transition: transform 0.45s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.08);
+}
+
+.gallery-item figcaption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 30px 14px 12px;
+    font-size: 14px;
+    color: #fff;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.78));
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.gallery-item:hover figcaption {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(8, 20, 34, 0.9);
+    padding: 20px;
+}
+
+#lightbox.open {
+    display: flex;
+}
+
+#lightbox img {
+    max-width: 92%;
+    max-height: 86vh;
+    border-radius: 10px;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.6);
+}
+
+#lightbox-close {
+    position: absolute;
+    top: 18px;
+    right: 30px;
+    font-size: 42px;
+    line-height: 1;
+    color: #fff;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+#lightbox-close:hover {
+    color: #a8d8f0;
+    transform: rotate(90deg);
+}
+
+@media screen and (max-width: 860px) {
+    .gallery .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .gallery .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-item img {
+        height: 200px;
+    }
+}
+
+/* ---------- D Web Studio page ---------- */
+.page-hero--studio {
+    background-image: linear-gradient(rgba(16, 40, 66, 0.7), rgba(16, 40, 66, 0.7)), url("https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?auto=format&fit=crop&w=1200&q=80");
+}
+
+section.studio-cta {
+    width: 100%;
+    max-width: none;
+    margin-top: 80px;
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #1a3c5e 0%, #2a6db0 100%);
+    text-align: center;
+}
+
+section.studio-cta h2 {
+    color: #fff;
+}
+
+section.studio-cta p {
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+.studio-cta .cta-btn {
+    display: inline-block;
+    margin-top: 28px;
+    background: #fff;
+    color: #1a3c5e;
+    padding: 14px 36px;
+    border-radius: 6px;
+    font-weight: 600;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.studio-cta .cta-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.35);
+    color: #1a3c5e;
+}

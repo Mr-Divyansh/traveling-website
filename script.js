@@ -240,4 +240,46 @@ document.addEventListener("DOMContentLoaded", function () {
 
   window.addEventListener("scroll", updateActiveLink, { passive: true });
   updateActiveLink();
+
+  /* ----- Gallery lightbox (opens any .gallery-item image) ----- */
+  var galleryImages = document.querySelectorAll(".gallery-item img");
+  if (galleryImages.length > 0) {
+    var lightbox = document.createElement("div");
+    lightbox.id = "lightbox";
+    lightbox.innerHTML =
+      '<button id="lightbox-close" type="button" aria-label="Close image">&times;</button>' +
+      '<img alt="">';
+    document.body.appendChild(lightbox);
+
+    var lightboxImg = lightbox.querySelector("img");
+    var closeBtn = lightbox.querySelector("#lightbox-close");
+
+    function openLightbox(img) {
+      lightboxImg.src = img.currentSrc || img.src;
+      lightboxImg.alt = img.alt;
+      lightbox.classList.add("open");
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove("open");
+    }
+
+    galleryImages.forEach(function (img) {
+      img.addEventListener("click", function () {
+        openLightbox(img);
+      });
+    });
+
+    closeBtn.addEventListener("click", closeLightbox);
+    lightbox.addEventListener("click", function (event) {
+      if (event.target === lightbox) {
+        closeLightbox();
+      }
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        closeLightbox();
+      }
+    });
+  }
 });
