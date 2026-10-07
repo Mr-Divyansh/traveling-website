@@ -192,14 +192,29 @@ document.addEventListener("DOMContentLoaded", function () {
   /* -------------------------------------------------
      7. Active Nav Link on Scroll
      ------------------------------------------------- */
-  var navLinks = document.querySelectorAll(".all-links a[href^='#']");
+  var navLinks = document.querySelectorAll(".all-links a");
   var sectionsById = {};
+  var currentPage = window.location.pathname.split("/").pop() || "index.html";
 
   navLinks.forEach(function (link) {
-    var id = link.getAttribute("href").slice(1);
-    var section = document.getElementById(id);
-    if (section) {
-      sectionsById[id] = { link: link, section: section };
+    var href = link.getAttribute("href") || "";
+    var hashIndex = href.indexOf("#");
+    var base = hashIndex >= 0 ? href.slice(0, hashIndex) : href;
+    var id = hashIndex >= 0 ? href.slice(hashIndex + 1) : "";
+
+    // Highlight the link of the current page (multi-page navigation)
+    if (href === currentPage) {
+      link.classList.add("active");
+    }
+
+    // Map in-page links to their sections for scroll highlighting
+    if (id && document.getElementById(id)) {
+      sectionsById[id] = { link: link, section: document.getElementById(id) };
+    } else if (!id && base === currentPage) {
+      var homeSection = document.getElementById("home");
+      if (homeSection) {
+        sectionsById["home"] = { link: link, section: homeSection };
+      }
     }
   });
 

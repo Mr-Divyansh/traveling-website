@@ -21,7 +21,11 @@ working contact form.
 
 | File | Purpose |
 |------|---------|
-| `index.html` | Main page markup |
+| `index.html` | Home page (hero, stats, packages, destinations, about, reviews, FAQ, contact) |
+| `packages.html` | Tour packages page |
+| `destinations.html` | Popular destinations page |
+| `about.html` | About us, founder & team page |
+| `contact.html` | Contact form & details page |
 | `travil.css` | Base styles |
 | `enhancements.css` | Stats, testimonials, FAQ, back-to-top styles |
 | `script.js` | Menu, form validation, counters, scroll effects |
